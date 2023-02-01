@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class PongGameManager : MonoBehaviour
 {
 
     [SerializeField] private TMP_Text paddle1ScoreText;
@@ -14,15 +14,15 @@ public class GameManager : MonoBehaviour
     private int paddle1Score;
     private int paddle2Score;
 
-    private static GameManager instance;
+    private static PongGameManager instance;
 
-    public static GameManager Instance
+    public static PongGameManager Instance
     {
         get 
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<GameManager>();
+                instance = FindObjectOfType<PongGameManager>();
             }
             return instance;
         }
