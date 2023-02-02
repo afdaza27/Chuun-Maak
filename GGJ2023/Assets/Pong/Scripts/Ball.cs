@@ -8,9 +8,11 @@ public class Ball : MonoBehaviour
     [SerializeField] private float initialVelocity = 4f;
     [SerializeField] private float velocityMultiplier = 1.1f;
     private Rigidbody2D ballRb;
+    private bool ableToScore;
     void Start()
     {
         ballRb = GetComponent<Rigidbody2D>();
+        ableToScore = false;
         Launch();
     }
 
@@ -28,16 +30,34 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Goal1"))
+        if(collision.gameObject.CompareTag("Hoop"))
+        {
+            ableToScore = true;
+        }
+        if(collision.gameObject.CompareTag("Goal1") && ableToScore)
         {
             PongGameManager.Instance.Paddle2Scored();
             PongGameManager.Instance.Restart();
+            ableToScore = false;
+            Launch();
+        }
+        else if(collision.gameObject.CompareTag("Goal2") && ableToScore)
+        {
+            PongGameManager.Instance.Paddle1Scored();
+            PongGameManager.Instance.Restart();
+            ableToScore = false;
+            Launch();
+        }
+        else if (collision.gameObject.CompareTag("Goal1"))
+        {
+            Launch();
+        }
+        else if (collision.gameObject.CompareTag("Goal2"))
+        {
             Launch();
         }
         else
         {
-            PongGameManager.Instance.Paddle1Scored();
-            PongGameManager.Instance.Restart();
             Launch();
         }
     }
