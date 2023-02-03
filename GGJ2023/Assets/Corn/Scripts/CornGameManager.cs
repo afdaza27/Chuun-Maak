@@ -11,6 +11,7 @@ public class CornGameManager : MonoBehaviour
     [SerializeField] private int maxMuds;
     [SerializeField] private int minWoods;
     [SerializeField] private int maxWoods;
+    [SerializeField] private GameObject generalMask;
 
     private float minXPos = -7f;
     private float maxXPos = 7f;
@@ -32,6 +33,8 @@ public class CornGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //generalMask = GameObject.FindGameObjectWithTag("Mask");
+        //generalMask.SetActive(false);
         SpawnElements();
     }
 
@@ -121,5 +124,10 @@ public class CornGameManager : MonoBehaviour
                 break;
         }
         Instantiate(Resources.Load<GameObject>(fileLocation));
+    }
+
+    public void SetMaskState(bool newState)
+    {
+        generalMask.SetActive(newState);
     }
 }

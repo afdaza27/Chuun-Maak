@@ -8,6 +8,7 @@ TagManager:
   - Goal1
   - Hoop
   - Goal2
+  - Mask
   layers:
   - Default
   - TransparentFX
@@ -44,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Back
+    uniqueID: 1981598133
+    locked: 0
+  - name: Front
+    uniqueID: 2480179469
     locked: 0
