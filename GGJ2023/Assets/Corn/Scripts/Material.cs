@@ -20,11 +20,12 @@ public class Material : MonoBehaviour
 
     public void spawnMan()
     {
-        CornGameManager.Instance.ShowMan(type);
+        CornGameManager.Instance.ShowMan(type, gameObject.transform);
     }
 
     private void OnMouseDown()
     {
         spawnMan();
+        GetComponent<AudioSource>().Play();
     }
 }

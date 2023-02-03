@@ -70,9 +70,16 @@ public class CornGameManager : MonoBehaviour
             //newMud.transform.position = new Vector3(Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), 0);
         }
         //Spawn corn
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 1; i++)
         {
             newCorn = Resources.Load<GameObject>("Prefabs/corn");
+            objectArray.Add(newCorn);
+            //newCorn.transform.position = new Vector3(Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), 0);
+        }
+        //Spawn corn
+        for (int i = 0; i < 1; i++)
+        {
+            newCorn = Resources.Load<GameObject>("Prefabs/corn2");
             objectArray.Add(newCorn);
             //newCorn.transform.position = new Vector3(Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), 0);
         }
@@ -106,24 +113,29 @@ public class CornGameManager : MonoBehaviour
         
     }
 
-    public void ShowMan(string type)
+    public void ShowMan(string type, Transform newTransform)
     {
         string fileLocation = "";
         switch(type){
             case "MUD":
                 //Show mudman animation
-                fileLocation = "Prefabs/mudman";
+                fileLocation = "mudman";
                 break;
             case "WOOD":
                 //Show woodman animation
-                fileLocation = "Prefabs/woodman";
+                fileLocation = "woodman";
                 break;
             case "CORN":
                 //Show corn animation
-                fileLocation = "Prefabs/twins";
+                fileLocation = "Twin1";
+                break; 
+            case "CORN2":
+                //Show corn animation
+                fileLocation = "Twin2";
                 break;
         }
-        Instantiate(Resources.Load<GameObject>(fileLocation));
+        GameObject man = Instantiate(Resources.Load<GameObject>(fileLocation));
+        man.transform.position = newTransform.position;
     }
 
     public void SetMaskState(bool newState)

@@ -59,6 +59,7 @@ public class RotateRoulette : MonoBehaviour
             {
                 rotating = false;
                 StartCoroutine(TotalBrake());
+                RouletteSoundManager.Instance.PlayLockSound();
             }
         }
     }
@@ -103,12 +104,13 @@ public class RotateRoulette : MonoBehaviour
         float currentTime = 0f;
         Quaternion initialRotation = Quaternion.identity;
         Quaternion currentRotation = transform.rotation;
-        while (currentRotation != initialRotation && currentTime<2f)
+        while (currentRotation != initialRotation && currentTime<1f)
         {
             currentTime += Time.deltaTime;
             transform.rotation = Quaternion.Lerp(currentRotation, initialRotation, currentTime / brakeTime);
             yield return null;
         }
+        
         RouletteGameManager.Instance.AddFinishedDisc();
         yield break;
     }

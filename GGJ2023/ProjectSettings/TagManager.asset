@@ -52,3 +52,12 @@ TagManager:
   - name: Front
     uniqueID: 2480179469
     locked: 0
+  - name: NewBack
+    uniqueID: 3264939625
+    locked: 0
+  - name: NewFront
+    uniqueID: 1388617991
+    locked: 0
+  - name: FrontAnimation
+    uniqueID: 1510322499
+    locked: 0

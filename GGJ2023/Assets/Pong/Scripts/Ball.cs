@@ -7,12 +7,17 @@ public class Ball : MonoBehaviour
     [SerializeField] private float initialVelocity = 4f;
     [SerializeField] private float velocityMultiplier = 1.1f;
     [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private AudioClip pointFavorClip;
+    [SerializeField] private AudioClip pointAgainstClip;
+    [SerializeField] private AudioClip nullPointClip;
     private Rigidbody2D ballRb;
+    private AudioSource audioSource;
     private bool ableToScore;
     private bool enemyAbleToScore;
     void Start()
     {
         ballRb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         ableToScore = false;
         enemyAbleToScore = false;
         Launch();
@@ -52,6 +57,8 @@ public class Ball : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Goal1") && enemyAbleToScore)
         {
+            audioSource.clip = pointAgainstClip;
+            audioSource.Play();
             PongGameManager.Instance.Paddle2Scored();
             PongGameManager.Instance.Restart();
             ableToScore = false;
@@ -60,6 +67,8 @@ public class Ball : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Goal2") && ableToScore)
         {
+            audioSource.clip = pointFavorClip;
+            audioSource.Play();
             PongGameManager.Instance.Paddle1Scored();
             PongGameManager.Instance.Restart();
             ableToScore = false;
