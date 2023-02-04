@@ -39,11 +39,15 @@ public class Twin : MonoBehaviour
         float currentTime = 0f;
 
         Vector3 currentPos = transform.position;
-        while (currentPos != finalPos)
+        while (currentPos != finalPos && currentTime<0.5f)
         {
             currentTime += Time.deltaTime;
             transform.position = Vector3.Lerp(currentPos, finalPos, currentTime / 0.45f);
             yield return null;
+        }
+        if (CornGameManager.Instance.GetCollectedCorn() == 2)
+        {
+            CornGameManager.Instance.LoadPongScene();
         }
         yield break;
     }

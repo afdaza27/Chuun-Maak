@@ -28,9 +28,12 @@ public class Ball : MonoBehaviour
     private void Launch()
     {
         particleSystem.Stop();
-        float xVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
-        float yVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
-        ballRb.velocity = new Vector2(xVelocity, yVelocity) * initialVelocity;
+        if (!PongGameManager.Instance.GameWon())
+        {
+            float xVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
+            float yVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
+            ballRb.velocity = new Vector2(xVelocity, yVelocity) * initialVelocity;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -62,6 +65,7 @@ public class Ball : MonoBehaviour
             audioSource.clip = pointAgainstClip;
             audioSource.Play();
             PongGameManager.Instance.Paddle2Scored();
+            ballRb.velocity = Vector2.zero;
             PongGameManager.Instance.Restart();
             ableToScore = false;
             enemyAbleToScore = false;
@@ -72,6 +76,7 @@ public class Ball : MonoBehaviour
             audioSource.clip = pointFavorClip;
             audioSource.Play();
             PongGameManager.Instance.Paddle1Scored();
+            ballRb.velocity = Vector2.zero;
             PongGameManager.Instance.Restart();
             ableToScore = false;
             enemyAbleToScore = false;

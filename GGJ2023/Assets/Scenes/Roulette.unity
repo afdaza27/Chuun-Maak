@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153adaae911be9c43836efe28bb778d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 288652574}
 --- !u!4 &162108334
 Transform:
   m_ObjectHideFlags: 0
@@ -712,7 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e9c58ba02456d41a1acf5c5a14fd59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 423498804}
   rouletteAudioSource: {fileID: 688872090}
 --- !u!1 &642706852
 GameObject:

@@ -13,15 +13,11 @@ public class CornGameManager : MonoBehaviour
     [SerializeField] private int minWoods;
     [SerializeField] private int maxWoods;
     [SerializeField] private GameObject generalMask;
+    [SerializeField] private float awaitTime;
 
-    private float minXPos = -7f;
-    private float maxXPos = 7f;
-    private float minYPos = -3.5f;
-    private float maxYPos = 0f;
-    private bool gameWon;
     private int collectedCorn = 0;
-    private float awaitTime = 0f;
     private float timeElapsed = 0f;
+    private bool victory = false;
 
     public static CornGameManager Instance
     {
@@ -40,26 +36,23 @@ public class CornGameManager : MonoBehaviour
     {
         //generalMask = GameObject.FindGameObjectWithTag("Mask");
         //generalMask.SetActive(false);
+        Cursor.visible = false;
         SpawnElements();
-        gameWon = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeElapsed += Time.deltaTime;
-        while (timeElapsed <= awaitTime)
+        if (!victory)
         {
-            if (collectedCorn == 2)
+            timeElapsed += Time.deltaTime;
+            if (timeElapsed > awaitTime)
             {
-                SceneManager.LoadScene("Pong");
+                Cursor.visible = true;
+                SceneManager.LoadScene("CornLose");
             }
         }
-        if (timeElapsed >= awaitTime)
-        {
-            SceneManager.LoadScene("CornLose");
-        }
-
+        
 
     }
 
@@ -164,8 +157,25 @@ public class CornGameManager : MonoBehaviour
         generalMask.SetActive(newState);
     }
 
-    public void SetTotalTime(float totalTime)
+    public float GetTotalTime()
     {
-        awaitTime = totalTime;
+        return awaitTime;
+    }
+
+    public int GetCollectedCorn()
+    {
+        return collectedCorn;
+    }
+
+    public void LoadPongScene()
+    {
+        victory = true;
+        Invoke("GoToPongScene", 2f);
+    }
+
+    private void GoToPongScene()
+    {
+        Cursor.visible = true;
+        SceneManager.LoadScene("PongTutorial");
     }
 }

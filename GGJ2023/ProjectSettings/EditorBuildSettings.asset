@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SunMoon.unity
     guid: ce2954d3feba3284fb1ceb6ae04092a6
+  - enabled: 1
+    path: Assets/Scenes/PongTutorial.unity
+    guid: 969e05ada99aeb046a7b404f5496904b
   m_configObjects: {}

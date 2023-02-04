@@ -6,6 +6,7 @@ public class Material : MonoBehaviour
 {
 
     [SerializeField] string type;
+    private bool spawned = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +21,19 @@ public class Material : MonoBehaviour
 
     public void spawnMan()
     {
+        spawned = true;
         CornGameManager.Instance.ShowMan(type, gameObject.transform);
     }
 
     private void OnMouseDown()
     {
-        spawnMan();
-        GetComponent<AudioSource>().Play();
+        if (!spawned)
+        {
+            spawnMan();
+            if (type == "CORN" || type == "CORN2")
+            {
+                GetComponent<AudioSource>().Play();
+            }
+        }
     }
 }
