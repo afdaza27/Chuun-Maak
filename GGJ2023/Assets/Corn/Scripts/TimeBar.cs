@@ -12,6 +12,7 @@ public class TimeBar : MonoBehaviour
     {
         finalScale = new Vector3(0,transform.localScale.y, transform.localScale.z);
         StartCoroutine(ReduceBar());
+        CornGameManager.Instance.SetTotalTime(totalTime);
     }
 
     // Update is called once per frame

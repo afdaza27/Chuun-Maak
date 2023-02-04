@@ -14,6 +14,8 @@ public class Ball : MonoBehaviour
     private AudioSource audioSource;
     private bool ableToScore;
     private bool enemyAbleToScore;
+    private bool rightLeft;
+
     void Start()
     {
         ballRb = GetComponent<Rigidbody2D>();
@@ -84,5 +86,13 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        if(ballRb.position.x <= 0)
+        {
+            PongGameManager.Instance.SetIsLeft(true);
+        }
+        else
+        {
+            PongGameManager.Instance.SetIsLeft(false);
+        }
     }
 }

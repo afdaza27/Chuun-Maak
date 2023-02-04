@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CornGameManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class CornGameManager : MonoBehaviour
     private float maxXPos = 7f;
     private float minYPos = -3.5f;
     private float maxYPos = 0f;
+    private bool gameWon;
+    private int collectedCorn = 0;
+    private float awaitTime = 0f;
+    private float timeElapsed = 0f;
 
     public static CornGameManager Instance
     {
@@ -36,12 +41,26 @@ public class CornGameManager : MonoBehaviour
         //generalMask = GameObject.FindGameObjectWithTag("Mask");
         //generalMask.SetActive(false);
         SpawnElements();
+        gameWon = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        timeElapsed += Time.deltaTime;
+        while (timeElapsed <= awaitTime)
+        {
+            if (collectedCorn == 2)
+            {
+                SceneManager.LoadScene("Pong");
+            }
+        }
+        if (timeElapsed >= awaitTime)
+        {
+            SceneManager.LoadScene("CornLose");
+        }
+
+
     }
 
     private void SpawnElements()
@@ -128,10 +147,12 @@ public class CornGameManager : MonoBehaviour
             case "CORN":
                 //Show corn animation
                 fileLocation = "Twin1";
+                collectedCorn++;
                 break; 
             case "CORN2":
                 //Show corn animation
                 fileLocation = "Twin2";
+                collectedCorn++;
                 break;
         }
         GameObject man = Instantiate(Resources.Load<GameObject>(fileLocation));
@@ -141,5 +162,10 @@ public class CornGameManager : MonoBehaviour
     public void SetMaskState(bool newState)
     {
         generalMask.SetActive(newState);
+    }
+
+    public void SetTotalTime(float totalTime)
+    {
+        awaitTime = totalTime;
     }
 }

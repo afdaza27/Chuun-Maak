@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PongGameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PongGameManager : MonoBehaviour
     [SerializeField] private Transform ballTransform;
     private int paddle1Score;
     private int paddle2Score;
+    private bool isLeft;
 
     private static PongGameManager instance;
 
@@ -56,6 +58,24 @@ public class PongGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(paddle1Score == 3)
+        {
+            SceneManager.LoadScene("SunMoon");
+        }
+        else if(paddle2Score == 3)
+        {
+            SceneManager.LoadScene("PongLose");
+        }
         
+    }
+
+    public void SetIsLeft(bool left)
+    {
+        isLeft = left;
+    }
+
+    public bool GetIsLeft()
+    {
+        return isLeft;
     }
 }
