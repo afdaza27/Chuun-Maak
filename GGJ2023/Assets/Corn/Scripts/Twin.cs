@@ -11,6 +11,7 @@ public class Twin : MonoBehaviour
     private float timeElapsed;
     private float growthTime = 1.3f;
     private Vector3 finalPos;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class Twin : MonoBehaviour
         startTime = true;
         timeElapsed = 0f;
         finalPos = new Vector3(finalXPos, finalYPos, 0);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class Twin : MonoBehaviour
             transform.position = Vector3.Lerp(currentPos, finalPos, currentTime / 0.45f);
             yield return null;
         }
+        audioSource.Play();
         if (CornGameManager.Instance.GetCollectedCorn() == 2)
         {
             CornGameManager.Instance.LoadPongScene();

@@ -10,6 +10,8 @@ public class Ball : MonoBehaviour
     [SerializeField] private AudioClip pointFavorClip;
     [SerializeField] private AudioClip pointAgainstClip;
     [SerializeField] private AudioClip nullPointClip;
+    [SerializeField] private AudioClip hoopClip;
+    [SerializeField] private AudioClip bounceClip;
     private Rigidbody2D ballRb;
     private AudioSource audioSource;
     private bool ableToScore;
@@ -22,7 +24,7 @@ public class Ball : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         ableToScore = false;
         enemyAbleToScore = false;
-        Launch();
+        Invoke("Launch", 1.5f);
     }
 
     private void Launch()
@@ -39,6 +41,12 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         ballRb.velocity *= velocityMultiplier;
+        string collisionTag = collision.gameObject.tag;
+        if(collisionTag != "Hoop" && collisionTag!= "Goal1" && collisionTag != "Goal2")
+        {
+            audioSource.clip = bounceClip;
+            audioSource.Play();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,6 +67,8 @@ public class Ball : MonoBehaviour
                 main.startColor = new ParticleSystem.MinMaxGradient(new Color(0.2627451f, 0.02471273f, 0.01568628f), new Color(0.9811321f, 0.008964817f, 0f));
             }
             particleSystem.Play();
+            audioSource.clip = hoopClip;
+            audioSource.Play();
         }
         else if(collision.gameObject.CompareTag("Goal1") && enemyAbleToScore)
         {
@@ -84,6 +94,8 @@ public class Ball : MonoBehaviour
         }
         else
         {
+            audioSource.clip = nullPointClip;
+            audioSource.Play();
             PongGameManager.Instance.Restart();
             Launch();
         }

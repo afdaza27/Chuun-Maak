@@ -14,9 +14,12 @@ public class FollowMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        posMouse = Input.mousePosition;
-        posMouse.z = -Camera.main.transform.position.z;
-        posMouse = Camera.main.ScreenToWorldPoint(posMouse);
-        gameObject.transform.position = posMouse;
+        if (!PauseManager.Instance.IsPaused())
+        {
+            posMouse = Input.mousePosition;
+            posMouse.z = -Camera.main.transform.position.z;
+            posMouse = Camera.main.ScreenToWorldPoint(posMouse);
+            gameObject.transform.position = posMouse;
+        }
     }
 }

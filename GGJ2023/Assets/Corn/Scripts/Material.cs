@@ -10,7 +10,12 @@ public class Material : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        int randomNumber = Random.Range(1, 3);
+        if (randomNumber == 2)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+
     }
 
     // Update is called once per frame
@@ -27,7 +32,7 @@ public class Material : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!spawned)
+        if (!spawned && !PauseManager.Instance.IsPaused())
         {
             spawnMan();
             if (type == "CORN" || type == "CORN2")

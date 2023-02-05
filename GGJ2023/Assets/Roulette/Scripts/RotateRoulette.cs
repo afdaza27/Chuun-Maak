@@ -19,6 +19,9 @@ public class RotateRoulette : MonoBehaviour
     //Time to achieve a complete stop
     [SerializeField] private float decelerationTime;
 
+    //Particle Sysyem
+    [SerializeField] private ParticleSystem particleSystem;
+
 
     //Angular current speed of rotation
     private float speed;
@@ -58,6 +61,7 @@ public class RotateRoulette : MonoBehaviour
             if (decelerating && transform.rotation.z >= -0.02f && transform.rotation.z <= 0.02f)
             {
                 rotating = false;
+                particleSystem.Play();
                 StartCoroutine(TotalBrake());
                 RouletteSoundManager.Instance.PlayLockSound();
             }

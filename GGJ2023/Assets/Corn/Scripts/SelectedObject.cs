@@ -39,8 +39,12 @@ public class SelectedObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        brightSpriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-        CornGameManager.Instance.SetMaskState(true);
-        startTime = true;
+        if (!PauseManager.Instance.IsPaused())
+        {
+            brightSpriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+            CornGameManager.Instance.SetMaskState(true);
+            startTime = true;
+        }
+
     }
 }

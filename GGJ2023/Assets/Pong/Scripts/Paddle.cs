@@ -26,10 +26,13 @@ public class Paddle : MonoBehaviour
         float movement;
         if (isPaddle1)
         {
-            movement = Input.GetAxisRaw("Vertical");
-            Vector2 paddlePosition = transform.position;
-            paddlePosition.y = Mathf.Clamp(paddlePosition.y + movement * speed * Time.deltaTime, -yBound, yBound);
-            transform.position = paddlePosition;
+            if (!PongGameManager.Instance.PaddleLocked())
+            {
+                movement = Input.GetAxisRaw("Vertical");
+                Vector2 paddlePosition = transform.position;
+                paddlePosition.y = Mathf.Clamp(paddlePosition.y + movement * speed * Time.deltaTime, -yBound, yBound);
+                transform.position = paddlePosition;
+            }
         }
         else
         {

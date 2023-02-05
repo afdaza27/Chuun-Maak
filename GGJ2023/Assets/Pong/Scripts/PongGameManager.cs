@@ -21,6 +21,7 @@ public class PongGameManager : MonoBehaviour
     private int paddle1Score;
     private int paddle2Score;
     private bool isLeft;
+    private bool paddleLocked;
     private GameObject point;
 
     private static PongGameManager instance;
@@ -83,7 +84,9 @@ public class PongGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Cursor.visible = false;
+        paddleLocked = true;
+        Invoke("UnlockPaddle", 1.5f);
     }
 
     // Update is called once per frame
@@ -92,13 +95,20 @@ public class PongGameManager : MonoBehaviour
         
     }
 
+    private void UnlockPaddle()
+    {
+        paddleLocked = false;
+    }
+
     private void LoadSunMoon()
     {
+        Cursor.visible = true;
         SceneManager.LoadScene("SunMoon");
     }
     
     private void LoadPongLose()
     {
+        Cursor.visible = true;
         SceneManager.LoadScene("PongLose");
     }
 
@@ -115,5 +125,10 @@ public class PongGameManager : MonoBehaviour
     public bool GameWon()
     {
         return (paddle1Score == 3 || paddle2Score == 3);
+    }
+
+    public bool PaddleLocked()
+    {
+        return paddleLocked;
     }
 }
