@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finalXPos: 6.5
-  finalYPos: 3.5
+  finalYPos: 3
 --- !u!82 &2639713877605103831
 AudioSource:
   m_ObjectHideFlags: 0

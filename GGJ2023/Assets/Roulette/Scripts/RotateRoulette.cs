@@ -58,7 +58,7 @@ public class RotateRoulette : MonoBehaviour
         {
             transform.Rotate(new Vector3(0f, 0f, speed));
             
-            if (decelerating && transform.rotation.z >= -0.02f && transform.rotation.z <= 0.02f)
+            if (decelerating && transform.rotation.z >= -0.06f && transform.rotation.z <= 0.06f)
             {
                 rotating = false;
                 particleSystem.Play();

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SunMoonManager : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("ShowButtons", 2f);
+        Invoke("ShowButtons", 6f);
     }
 
     // Update is called once per frame
@@ -18,6 +19,7 @@ public class SunMoonManager : MonoBehaviour
 
     private void ShowButtons()
     {
+        audioSource.Play();
         Instantiate(Resources.Load<GameObject>("SunMoonCanvas"));
     }
 }
